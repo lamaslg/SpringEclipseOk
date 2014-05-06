@@ -1,8 +1,124 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+
+"
+
+>
+
+
+
+<!--<bean id="propertyConfigurer"
+      class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+      p:location="/WEB-INF/jdbc.properties" />
+  -->        
+    
+  <context:component-scan base-package="com.luis" />
+
+      
+       <mvc:annotation-driven/>           
+                      
+
+<bean id="dataSource"
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+    
+
+>
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      <property name="url" value="jdbc:mysql://localhost:3306/empleados"/>
+      <property name="username" value="root" />
+      <property name="password" value="240199" />  
+    
+    
+</bean>
+ <bean id="sessionFactory"
+    class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+        <property name="configLocation">
+            <value>/WEB-INF/classes/hibernate.cfg.xml</value>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQLDialect
+                </prop>
+                <prop key="show_sql">
+                    true
+                </prop>
+            </props>
+            
+        </property>
+    </bean>
+ 
+ <bean id="txManager"  
+       class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+   <property name="sessionFactory" ref="sessionFactory" />   
+ </bean>
+ 
+ <bean id="daoEmpleado" class="com.luis.servicios.ManagerEmpleados">
+     <property name="sessionFactory" ref="sessionFactory" />
+ </bean>
+ <bean id="daoConocimientos" 
+       class="com.luis.servicios.ManagerConocimientos">
+     <property name="sessionFactory" ref="sessionFactory" />
+ </bean>
+ <bean id="managerPuesto" 
+       class="com.luis.servicios.ManagerPuestos">
+     <property name="sessionFactory" ref="sessionFactory" />
+ </bean>
+ <tx:annotation-driven transaction-manager="txManager"  
+                       proxy-target-class="true"/>
+ 
+ <!--<bean id="springHibernateDao" 
+       class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+     <property name="transactionManager" ref="txManager" />
+     <property name="target" ref="daoEmpleado" />
+     <property name="transactionAttributes">
+            <props> 
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="store*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+            </props>
+     </property>
+ </bean>-->
+
+    
 </beans>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
