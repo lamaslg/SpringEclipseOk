@@ -13,6 +13,9 @@
         Empleados de la compañia a dia 
         <fmt:formatDate value="${fecha}" />
         
+        
+        <a href="AltaEmpleado.htm">Nuevo empleado</a>
+        
         <table>
             <tr>
                 <td>
@@ -21,6 +24,7 @@
                 <td>
                     Salario
                 </td>
+                <td>Acciones</td>
             </tr>
             <c:forEach items="${empleados}" var="empleado">
                  <tr>
@@ -29,6 +33,14 @@
                 </td>
                 <td>
                     ${empleado.salario}
+                </td>
+                <td>
+                		<a href="#" id="lnkBor" data-code="${empleado.idEmpleado}">
+                		Borrar empleado
+                		</a>
+                		<a href="ModificarEmpleado.htm?id=${empleado.idEmpleado}">
+                		Modificar empleado
+                		</a>
                 </td>
             </tr>
                 

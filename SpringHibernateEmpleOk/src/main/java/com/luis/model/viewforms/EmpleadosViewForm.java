@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class EmpleadosViewForm {
     
+	private Integer idEmpleado;
     private String nombre;
     private Double salario;
     private Integer puesto;
@@ -65,6 +66,14 @@ public class EmpleadosViewForm {
     public void setSalario(Double salario) {
         this.salario = salario;
     }
+
+	public Integer getIdEmpleado() {
+		return idEmpleado;
+	}
+
+	public void setIdEmpleado(Integer idEmpleado) {
+		this.idEmpleado = idEmpleado;
+	}
 
 	
     
