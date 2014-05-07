@@ -98,7 +98,7 @@ public class ModificarEmpleadoController {
              
     	
     	Integer id=Integer.parseInt(req.getParameter("id"));
-    	Empleado emp=managerEmpleados.getEmpleado(id);
+    	Empleado emp=managerEmpleados.getEmpleado(id,false);
     	
         EmpleadosViewForm empleado=new EmpleadosViewForm();
         empleado.setSalario(emp.getSalario());

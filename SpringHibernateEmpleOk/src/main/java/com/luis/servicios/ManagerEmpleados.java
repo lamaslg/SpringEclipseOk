@@ -6,10 +6,14 @@
 
 package com.luis.servicios;
 
+import pojos.Conocimientos;
 import pojos.Empleado;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -26,14 +30,16 @@ public class ManagerEmpleados
     
     
     
-    public Empleado getEmpleado(Integer id){
+    public Empleado getEmpleado(Integer id,boolean lazy){
     
         Session ses=  getHibernateTemplate().
                 getSessionFactory().getCurrentSession();
              
         
         Empleado em=(Empleado) ses.get(Empleado.class, id);
-      
+        if(!lazy)
+        		Hibernate.initialize(em.getConocimientos());
+	
     
         return em;
     }
@@ -50,17 +56,17 @@ public class ManagerEmpleados
     public void deleteEmpleado(Empleado em){
          Session ses=  getHibernateTemplate().
                 getSessionFactory().getCurrentSession();
-        ses.beginTransaction();
+       // ses.beginTransaction();
         ses.delete(em);
-        ses.getTransaction().commit();
+       // ses.getTransaction().commit();
     
     }
     public void updateEmpleado(Empleado em){
      Session ses=  getHibernateTemplate().
                 getSessionFactory().getCurrentSession();
-        ses.beginTransaction();
+        //ses.beginTransaction();
         ses.update(em);
-        ses.getTransaction().commit();
+       // ses.getTransaction().commit();
     }
      
     public Collection<Empleado> getAllEmpleados(){
