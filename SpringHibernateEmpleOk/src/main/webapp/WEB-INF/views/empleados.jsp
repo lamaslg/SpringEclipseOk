@@ -16,7 +16,7 @@
         
         <a href="AltaEmpleado.htm">Nuevo empleado</a>
         
-        <table>
+        <table id="tablita">
             <tr>
                 <td>
                     Nombre
@@ -35,7 +35,7 @@
                     ${empleado.salario}
                 </td>
                 <td>
-                		<a href="#" id="lnkBor" data-code="${empleado.idEmpleado}">
+                		<a href="#"  class="borr" data-code="${empleado.idEmpleado}">
                 		Borrar empleado
                 		</a>
                 		<a href="ModificarEmpleado.htm?id=${empleado.idEmpleado}">
@@ -46,9 +46,72 @@
                 
             </c:forEach>
         </table>
-        
+        <script type="text/javascript" src='<c:url value="/resources/js/jquery-1.11.1.min.js" />'></script>
+   		
+   		<script type="text/javascript">
+   		
+   		$(document).ready(function(){
+   			$(".borr").click(function(){
+   				
+   				var enl=this.getAttribute('data-code');
+   				var celda=this.parentNode;
+   				var fila=celda.parentNode;
+   				
+   				
+   				var data={idEmpleado:enl};
+   				data=JSON.stringify(data);
+   				
+   				$.ajax(
+   				"empleado",
+   				{
+   					data: data,
+   					method: 'DELETE',
+   					contentType: 'application/json',
+   					success: function(xhr){
+   						alert(xhr.idEmpleado +" ha sido dado de baja");
+   						fila.parentNode.removeChild(fila);
+   						
+   						
+   						
+   						
+   					},
+   					error: function(xhr){
+   						
+   						alert(JSON.stringify(xhr));
+   						
+   					}
+   					
+   				}
+   				
+   				);
+   				
+   				
+   				
+   				
+   			});
+   			
+   			
+   			
+   			
+   			
+   		});
+   		
+   		</script>
+   
+   
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
