@@ -20,7 +20,9 @@
         <many-to-one name="puesto" class="pojos.Puesto"
                 column="idPuesto" >
         </many-to-one>
-        
+        <property name="foto" type="string">
+            <column name="foto" length="450" not-null="false" />
+        </property>
         <set name="conocimientos" table="Empleado_Conocimiento" >
             <key column="idEmpleado"></key>
             <many-to-many column="idConocimiento" class="pojos.Conocimientos" />

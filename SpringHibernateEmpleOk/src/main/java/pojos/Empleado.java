@@ -16,6 +16,7 @@ public class Empleado  implements java.io.Serializable {
      private double salario;
      private Date fechaAlta;
      private Puesto puesto;
+     private String foto;
      private Set<Conocimientos> conocimientos;
 
     public Set<Conocimientos> getConocimientos() {
@@ -76,6 +77,14 @@ public class Empleado  implements java.io.Serializable {
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
    
 
 
