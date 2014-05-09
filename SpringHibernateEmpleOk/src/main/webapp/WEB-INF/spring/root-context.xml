@@ -38,9 +38,9 @@
 
 >
     <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-      <property name="url" value="jdbc:mysql://localhost:3306/empleados"/>
-      <property name="username" value="root" />
-      <property name="password" value="240199" />  
+      <property name="url" value="jdbc:mysql://luisgilpruebas.cloudapp.net:3306/curso"/>
+      <property name="username" value="curso" />
+      <property name="password" value="curso" />  
     
     
 </bean>
@@ -56,7 +56,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">
-                    org.hibernate.dialect.MySQLDialect
+                    org.hibernate.dialect.MySQL5Dialect
                 </prop>
                 <prop key="show_sql">
                     true

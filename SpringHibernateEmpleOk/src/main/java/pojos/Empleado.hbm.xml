@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 22-abr-2014 18:45:34 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
-    <class name="pojos.Empleado" table="Empleado" catalog="Empleados">
+    <class name="pojos.Empleado" table="Empleado" catalog="curso">
         <id name="idEmpleado" type="java.lang.Integer">
             <column name="idEmpleado" />
             <generator class="identity" />

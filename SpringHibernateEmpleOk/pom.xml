@@ -65,11 +65,11 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 		<!-- Mysql -->
-		<dependency>
+		<!-- <dependency>
 	<groupId>mysql</groupId>
 	<artifactId>mysql-connector-java</artifactId>
-	<version>5.1.30</version>
-</dependency>
+	<version>5.5.1</version>
+</dependency>-->
 		<!-- JSTL -->
 				<dependency>
 	<groupId>jstl</groupId>
