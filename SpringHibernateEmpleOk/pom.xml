@@ -16,6 +16,13 @@
 		<jackson.version>1.9.10</jackson.version>
 	</properties>
 	<dependencies>
+	    <!-- Javax mail -->
+	    <dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+            
 	    <!-- Commons -->
 	    <dependency>
 	<groupId>commons-io</groupId>
