@@ -6,6 +6,12 @@
 
 package com.luis.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,6 +27,8 @@ import com.luis.servicios.ManagerPuestos;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.DiskFileUpload;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,7 +46,7 @@ import pojos.Puesto;
 @Controller
 @RequestMapping(value = "/AltaEmpleado.htm")
 public class AltaEmpleadoController {
-    
+    static String path;
     @Autowired
     private ManagerEmpleados managerEmpleados;
 
@@ -77,8 +85,37 @@ public class AltaEmpleadoController {
     
     @RequestMapping(method = RequestMethod.POST)
     protected String onSubmit(EmpleadosViewForm empleado,
-            BindingResult result){
+            BindingResult result,HttpServletRequest req){
     
+    	Date d=new Date();
+    String ruta=d.getTime()+".png";
+    
+   
+    	File dir=new File("/uploads");
+    	if(!dir.exists())
+    		dir.mkdir();
+    	
+    System.out.println(dir.getAbsolutePath());
+    	
+    	File f=new File(dir,ruta);
+    	
+    	try {
+			FileOutputStream fos=new FileOutputStream(f);
+			byte[] datos=new byte[(int) empleado.getFoto().getSize()];
+			empleado.getFoto().getInputStream().read(datos);
+			fos.write(datos);
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+  
+    	
+    	
+    	
           if(result.hasErrors())
               return "AltaEmpleado";
     
@@ -89,7 +126,7 @@ public class AltaEmpleadoController {
           em.setSalario(empleado.getSalario());
           em.setPuesto(p);
           em.setFechaAlta(empleado.getFechaAlta());
-          
+          em.setFoto("/uploads/"+ruta);
           Set<Conocimientos> sc=new HashSet<Conocimientos>();
           for (Integer idCon : empleado.getConocimientos()) {
 			Conocimientos con=new Conocimientos();
@@ -108,7 +145,8 @@ public class AltaEmpleadoController {
     @RequestMapping(method = RequestMethod.GET)
     protected EmpleadosViewForm formBackingObject
                     (HttpServletRequest req)throws Exception{
-                        
+               path=req.getSession().getServletContext().getRealPath("/");
+              
         EmpleadosViewForm empleado=new EmpleadosViewForm();
         empleado.setSalario(new Double(35000));
         req.setAttribute("empleado", empleado);

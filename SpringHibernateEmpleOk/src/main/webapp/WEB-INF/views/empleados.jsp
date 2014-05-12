@@ -29,6 +29,7 @@
             <c:forEach items="${empleados}" var="empleado">
                  <tr>
                 <td>
+                <img src='<c:url value="${empleado.foto }"/>' />
                     ${empleado.nombre}
                 </td>
                 <td>

@@ -11,7 +11,7 @@
     <body>
 
         <form:form method="post" commandName="empleado"
-                   
+                   enctype="multipart/form-data"
                    >
             <label>Nombre:</label>
             <br>
@@ -33,6 +33,7 @@
             				items="${conocimientos}" multiple="true">
             </form:select>
             
+            <form:input path="foto" type="file" /> 
             <input type="submit" value="Ok">
             
         </form:form>
