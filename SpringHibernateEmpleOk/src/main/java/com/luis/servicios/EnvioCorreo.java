@@ -10,13 +10,14 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 
 public class EnvioCorreo {
 
 	final static String CORREO="cursomicroforum2014@gmail.com";
 	final static String PASS="mecagoentupadre";
 	final static String SMTP="smtp.gmail.com";
-	final static String PUERTO="465";
+	final static String PUERTO="587";
 	
 	
 	public static void EnviarCorreo(String destino,String asunto,
@@ -63,7 +64,7 @@ public class EnvioCorreo {
 		}
 		try {
 			t.connect(CORREO, PASS);
-			t.send(msg);
+			t.sendMessage(msg,msg.getRecipients(RecipientType.TO));
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
