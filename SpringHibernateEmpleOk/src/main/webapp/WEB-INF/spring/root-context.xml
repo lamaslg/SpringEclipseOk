@@ -2,6 +2,7 @@
 <!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:s="http://www.springframework.org/schema/security"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -14,9 +15,8 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
-
-"
-
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security-3.2.xsd"
 >
 
 
@@ -103,7 +103,22 @@
      </property>
  </bean>-->
 
-    
+<s:http auto-config="true">
+    <s:intercept-url pattern="/ver**" access="ROL_USUARIO"/>
+    <s:intercept-url pattern="/admin**" access="ROL_ADMINISTRADOR"/>
+</s:http>
+
+<s:authentication-manager>
+    <s:authentication-provider>
+        <s:user-service>
+            <s:user name="luis" password="123456" authorities="ROL_USUARIO"/>
+            <s:user name="pepe" password="123456" authorities="ROL_ADMINISTRADOR"/>
+            
+        </s:user-service>
+    </s:authentication-provider>
+</s:authentication-manager>
+
+
 </beans>
 
 
