@@ -104,15 +104,15 @@
  </bean>-->
 
 <s:http auto-config="true">
-    <s:intercept-url pattern="/ver**" access="ROL_USUARIO"/>
-    <s:intercept-url pattern="/admin**" access="ROL_ADMINISTRADOR"/>
+    <s:intercept-url pattern="/ver**" access="ROLE_USUARIO"/>
+    <s:intercept-url pattern="/admin**" access="ROLE_ADMINISTRADOR"/>
 </s:http>
 
 <s:authentication-manager>
     <s:authentication-provider>
         <s:user-service>
-            <s:user name="luis" password="123456" authorities="ROL_USUARIO"/>
-            <s:user name="pepe" password="123456" authorities="ROL_ADMINISTRADOR"/>
+            <s:user name="luis" password="123456" authorities="ROLE_USUARIO"/>
+            <s:user name="pepe" password="123456" authorities="ROLE_ADMINISTRADOR"/>
             
         </s:user-service>
     </s:authentication-provider>
