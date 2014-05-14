@@ -39,7 +39,7 @@ import pojos.Puesto;
  * @author luis
  */
 @Controller
-@RequestMapping(value = "/AltaEmpleado.htm")
+@RequestMapping(value = "/AdminAltaEmpleado.htm")
 public class AltaEmpleadoController {
     static String path;
     @Autowired

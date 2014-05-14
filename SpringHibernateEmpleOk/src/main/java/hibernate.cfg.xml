@@ -11,5 +11,6 @@
     <mapping resource="pojos/Usuario.hbm.xml"/>
     <mapping resource="pojos/Empleado.hbm.xml"/>
     <mapping resource="pojos/Puesto.hbm.xml"/>
+    <mapping resource="pojos/Rol.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -12,7 +12,10 @@ public class Usuario  implements java.io.Serializable {
      private Integer idUsuario;
      private String login;
      private String password;
-
+     private Rol rol;
+     
+     
+     
     public Usuario() {
     }
 
@@ -21,7 +24,16 @@ public class Usuario  implements java.io.Serializable {
        this.password = password;
     }
    
-    public Integer getIdUsuario() {
+    
+    public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
+	public Integer getIdUsuario() {
         return this.idUsuario;
     }
     

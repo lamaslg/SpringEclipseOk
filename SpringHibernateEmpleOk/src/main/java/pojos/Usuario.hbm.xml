@@ -14,5 +14,8 @@
         <property name="password" type="string">
             <column name="password" length="45" not-null="true" />
         </property>
+         <many-to-one name="rol" class="pojos.Rol"
+                column="idRol" >
+        </many-to-one>
     </class>
 </hibernate-mapping>
