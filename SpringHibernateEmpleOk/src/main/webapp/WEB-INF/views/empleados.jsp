@@ -10,12 +10,19 @@
         <title>JSP Page</title>
     </head>
     <body>
+    <c:if test="${pageContext.request.userPrincipal.name!=null}">
+    Bienvenido ${pageContext.request.userPrincipal.name}
+     <a href='<c:url value="j_spring_security_logout" />'>Logout</a>
+    
+    </c:if>
+    
+    
         Empleados de la compañia a dia 
         <fmt:formatDate value="${fecha}" />
         
         
-        <a href="AltaEmpleado.htm">Nuevo empleado</a>
-        
+        <a href="AdminAltaEmpleado.htm">Nuevo empleado</a>
+        <a href='<c:url value="j_spring_security_logout" />'>Logout</a>
         <table id="tablita">
             <tr>
                 <td>

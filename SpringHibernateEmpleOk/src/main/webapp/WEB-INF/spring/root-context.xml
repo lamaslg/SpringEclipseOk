@@ -85,6 +85,10 @@
        class="com.luis.servicios.ManagerPuestos">
      <property name="sessionFactory" ref="sessionFactory" />
  </bean>
+  <bean id="managerAuth" 
+       class="com.luis.servicios.ManagerAuth">
+     <property name="sessionFactory" ref="sessionFactory" />
+ </bean>
  <tx:annotation-driven transaction-manager="txManager"  
                        proxy-target-class="true"/>
  
@@ -106,8 +110,8 @@
 <s:http auto-config="true">
     <s:intercept-url pattern="/ver**" access="ROLE_USUARIO"/>
     <s:intercept-url pattern="/admin**" access="ROLE_ADMINISTRADOR"/>
+    <s:form-login login-page="/login.htm"/>
 </s:http>
-
 <s:authentication-manager>
     <s:authentication-provider>
         <s:user-service>
@@ -117,6 +121,7 @@
         </s:user-service>
     </s:authentication-provider>
 </s:authentication-manager>
+
 
 
 </beans>

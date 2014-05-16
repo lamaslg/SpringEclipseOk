@@ -2,6 +2,7 @@ package com.luis.servicios;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -29,10 +30,10 @@ public class ManagerAuth extends HibernateDaoSupport{
 				e.printStackTrace();
 			}
 	        List<Usuario> usua=q.list();  
-        if(usua.size()>0)
+        if(usua.size()>0){
         	    us=usua.get(0);
-      
-    
+        	    Hibernate.initialize(us.getRol());
+        }
         return us;
 		
 		

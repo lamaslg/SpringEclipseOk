@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<form:form>
+<form:form  method="post" commandName="usuario">
 
 <label>Login</label>
 <form:input path="login"/><br>
