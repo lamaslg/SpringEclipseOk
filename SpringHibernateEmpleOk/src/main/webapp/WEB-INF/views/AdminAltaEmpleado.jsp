@@ -27,6 +27,7 @@
             <form:option value="-1" label="-De que curra este-"></form:option>
             		<form:options items="${puestos}"/>
             </form:select>
+            <form:errors path="puesto"></form:errors>
             <br>
             <label>Conocimientos</label>
             <form:select path="conocimientos" 

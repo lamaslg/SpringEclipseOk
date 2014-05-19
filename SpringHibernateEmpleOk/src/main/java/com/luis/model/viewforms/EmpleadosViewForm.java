@@ -8,7 +8,15 @@ package com.luis.model.viewforms;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
+
 
 /**
  *
@@ -17,8 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class EmpleadosViewForm {
     
 	private Integer idEmpleado;
-    private String nombre;
-    private Double salario;
+	@NotNull(message="El nombre es obligatorio")
+	@Size(min=4,max=30)
+	private String nombre;
+    @NotNull
+    @Range(min=9000,max=60000)
+	private Double salario;
+    @Range(min=1,max=Integer.MAX_VALUE)
     private Integer puesto;
     private Date fechaAlta;
     private Integer[] conocimientos;

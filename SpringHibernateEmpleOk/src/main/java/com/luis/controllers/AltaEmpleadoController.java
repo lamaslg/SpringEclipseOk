@@ -7,7 +7,6 @@
 package com.luis.controllers;
 
 import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,9 +23,13 @@ import com.luis.servicios.ManagerEmpleados;
 import com.luis.servicios.ManagerPuestos;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -79,9 +82,34 @@ public class AltaEmpleadoController {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    protected String onSubmit(EmpleadosViewForm empleado,
+    protected String onSubmit(@Valid @ModelAttribute("empleado") 
+    								EmpleadosViewForm empleado,
             BindingResult result,HttpServletRequest req){
     
+    	 if(result.hasErrors()){
+    		 Collection<Puesto> lp=managerPuestos.getAllPuesto();
+    	        Map<Integer,String> m=new HashMap<Integer, String>();
+    	        
+    	        Collection<Conocimientos> lc=managerConocimientos.getAllConocimientos();
+    	        Map<Integer,String> mc=new HashMap<Integer, String>();
+    	        
+    	        for (Puesto puesto : lp) {
+    				m.put(puesto.getIdPuesto(), puesto.getNombre());
+    			}
+    	        
+    	        for (Conocimientos conocimientos : lc) {
+    				mc.put(conocimientos.getIdConocimiento(), 
+    						conocimientos.getNombre());
+    			}
+    	        
+    	        
+    	        req.setAttribute("puestos", m);
+    	        req.setAttribute("conocimientos", mc);
+    	        
+    		 
+    		 return "AdminAltaEmpleado";
+    	 }
+    	
     	Date d=new Date();
     String ruta=d.getTime()+".png";
     
@@ -111,9 +139,7 @@ public class AltaEmpleadoController {
     	
     	
     	
-          if(result.hasErrors())
-              return "AltaEmpleado";
-    
+         
           Puesto p=new Puesto();
           p.setIdPuesto(empleado.getPuesto());
           Empleado em=new Empleado();
@@ -138,13 +164,13 @@ public class AltaEmpleadoController {
     }
     
     @RequestMapping(method = RequestMethod.GET)
-    protected EmpleadosViewForm formBackingObject
-                    (HttpServletRequest req)throws Exception{
+    protected String formBackingObject
+                    (ModelMap modelo,HttpServletRequest req)throws Exception{
                path=req.getSession().getServletContext().getRealPath("/");
               
         EmpleadosViewForm empleado=new EmpleadosViewForm();
         empleado.setSalario(new Double(35000));
-        req.setAttribute("empleado", empleado);
+        modelo.addAttribute("empleado", empleado);
         
         Collection<Puesto> lp=managerPuestos.getAllPuesto();
         Map<Integer,String> m=new HashMap<Integer, String>();
@@ -162,10 +188,10 @@ public class AltaEmpleadoController {
 		}
         
         
-        req.setAttribute("puestos", m);
-        req.setAttribute("conocimientos", mc);
+        modelo.addAttribute("puestos", m);
+        modelo.addAttribute("conocimientos", mc);
         
-        return empleado;
+        return "AdminAltaEmpleado";
         
         }
     
